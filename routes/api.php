@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\EnsureTokenIsValid;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group([
+
+    'middleware' => ['auth:api'],
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class,'login'])->name('login');//'Api\AuthController@login'
+    Route::post('logout', [AuthController::class,'logout'])->name('logout');//'Api\AuthController@logout'
+});
+
+
+Route::group([
+
+    'middleware' => ['auth:api',EnsureTokenIsValid::class],
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('refresh',[AuthController::class,'refresh'])->name('refresh');// 'Api\AuthController@refresh'
+    Route::post('me',[AuthController::class,'me'] )->name('me');//'Api\AuthController@me'
+
 });
