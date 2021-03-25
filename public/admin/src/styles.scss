@@ -2,3 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// background-color: #007069;
+.mat-toolbar.mat-primary{
+  // background: #22867e;
+  background:linear-gradient(45deg, #062e2b, #296a96, #209096, #2aa2b8);
+	background-size: 40% 20% 20% 20%;
+  color: #aad3da;
+	// animation: gradient 15s ease infinite;
+}
