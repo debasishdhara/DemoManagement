@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureTokenIsValid;
+use Facade\FlareClient\Http\Response;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,9 +22,8 @@ use App\Http\Middleware\EnsureTokenIsValid;
 // });
 
 Route::group([
-
-    'middleware' => ['auth:api'],
-    'prefix' => 'auth'
+    'middleware' => 'api',
+    'prefix' => 'v1'
 
 ], function ($router) {
 
@@ -33,11 +34,22 @@ Route::group([
 
 Route::group([
 
-    'middleware' => ['auth:api',EnsureTokenIsValid::class],
+    'middleware' => [EnsureTokenIsValid::class,'auth:api'],
     'prefix' => 'auth'
 
 ], function ($router) {
     Route::post('refresh',[AuthController::class,'refresh'])->name('refresh');// 'Api\AuthController@refresh'
     Route::post('me',[AuthController::class,'me'] )->name('me');//'Api\AuthController@me'
 
+});
+
+
+Route::fallback(function () {
+    return response()->json(["serverResponse" => [
+        "code" => 401,
+        "message" => "Unauthorized User",
+        "isSuccess" => false
+    ],
+    'token_invalid'=>true
+    ]);
 });

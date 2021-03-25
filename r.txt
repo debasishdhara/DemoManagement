@@ -2,14 +2,13 @@
 | Domain | Method   | URI              | Name    | Action                                          | Middleware                             |
 +--------+----------+------------------+---------+-------------------------------------------------+----------------------------------------+
 |        | GET|HEAD | /                |         | Closure                                         | web                                    |
-|        | POST     | api/auth/login   | login   | App\Http\Controllers\Api\AuthController@login   | api                                    |
-|        |          |                  |         |                                                 | auth:api                               |
-|        | POST     | api/auth/logout  | logout  | App\Http\Controllers\Api\AuthController@logout  | api                                    |
-|        |          |                  |         |                                                 | auth:api                               |
 |        | POST     | api/auth/me      | me      | App\Http\Controllers\Api\AuthController@me      | api                                    |
 |        |          |                  |         |                                                 | auth:api                               |
 |        |          |                  |         |                                                 | App\Http\Middleware\EnsureTokenIsValid |
 |        | POST     | api/auth/refresh | refresh | App\Http\Controllers\Api\AuthController@refresh | api                                    |
 |        |          |                  |         |                                                 | auth:api                               |
 |        |          |                  |         |                                                 | App\Http\Middleware\EnsureTokenIsValid |
+|        | POST     | api/v1/login     | login   | App\Http\Controllers\Api\AuthController@login   | api                                    |
+|        | POST     | api/v1/logout    | logout  | App\Http\Controllers\Api\AuthController@logout  | api                                    |
+|        |          |                  |         |                                                 | auth:api                               |
 +--------+----------+------------------+---------+-------------------------------------------------+----------------------------------------+
