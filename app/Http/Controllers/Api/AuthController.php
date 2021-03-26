@@ -7,6 +7,10 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -30,7 +34,11 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(["serverResponse" => [
+                "code" => 401,
+                "message" => "User Details Not Found",
+                "isSuccess" => false
+            ],], 200);
         }
         $userdetails= User::with('roles')->find(auth()->user()->id);
         return response()->json([
@@ -53,7 +61,27 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }else{
+                return response()->json(auth()->user());
+            }
+        } catch (TokenExpiredException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+        } catch (TokenInvalidException $e) {
+                return response()->json(['token_invalid'], $e->getStatusCode());
+        } catch (JWTException $e) {
+                return response()->json(['token_absent'], $e->getStatusCode());
+        }
+        return response()->json([
+            "serverResponse" => [
+                "code" => 401,
+                "message" => "User Details Not Found",
+                "isSuccess" => true
+            ]
+            ]);
+        // return response()->json(auth()->user());
     }
 
     /**

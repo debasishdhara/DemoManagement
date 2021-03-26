@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoutecheckService } from './routecheck.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'projectdemo';
-  authCheck:boolean = true;
+  authCheck:boolean = false;
+  constructor(private authcheckService:RoutecheckService) {
+    authcheckService.checkAuth().subscribe(res=>{
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
+  }
 }

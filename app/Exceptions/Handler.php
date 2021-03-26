@@ -4,7 +4,10 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -34,48 +37,27 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+
         $this->reportable(function (Throwable $e) {
-            //
+            try {
+                if (! $user = JWTAuth::parseToken()->authenticate()) {
+                    return response()->json(['user_not_found'], 404);
+                }
+            } catch (TokenExpiredException $e) {
+                    return response()->json(['token_expired'], $e->getStatusCode());
+            } catch (TokenInvalidException $e) {
+                    return response()->json(['token_invalid'], $e->getStatusCode());
+            } catch (JWTException $e) {
+                    return response()->json(['token_absent'], $e->getStatusCode());
+            }
+            return response()->json([
+                "serverResponse" => [
+                    "code" => 401,
+                    "message" => "User Details Not Found",
+                    "isSuccess" => true
+                ]
+                ]);
         });
     }
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Throwable
-     */
-    public function render($request, Throwable $exception)
-    {
-        //return parent::render($request, $exception);
-
-            if ($this->isHttpException($exception)) {
-                switch ($exception->getStatusCode()) {
-
-                    // not authorized
-                    case '403':
-                        return \Response::view('errors.403',array(),403);
-                        break;
-
-                    // not found
-                    case '404':
-                        return \Response::view('errors.404',array(),404);
-                        break;
-
-                    // internal error
-                    case '500':
-                        return \Response::view('errors.500',array(),500);
-                        break;
-
-                    default:
-                        return $this->renderHttpException($exception);
-                        break;
-                }
-            } else {
-                return parent::render($request, $exception);
-            }
-    }
 }
