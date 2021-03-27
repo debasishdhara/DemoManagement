@@ -69,7 +69,7 @@ class JobDetailsController extends Controller
                 return response()->json([
                     "serverResponse" => [
                     "code" => 200,
-                    "message" => 'Request All',
+                    "message" => 'Successfully Created',
                     "isSuccess" => true
                     ],
                     "result"=>new JobDetailsResource($jobdetails)
