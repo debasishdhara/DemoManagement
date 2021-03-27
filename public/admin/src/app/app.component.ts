@@ -123,7 +123,7 @@ export class AppComponent {
   isOpen:boolean = false;
   events: string[] = [];
   opened: boolean;
-
+  username:any;
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   @ViewChild(LoginComponent) logcheck;
   constructor(private authcheckService:RoutecheckService,private router:Router,iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
@@ -137,6 +137,8 @@ export class AppComponent {
     let authdata = JSON.parse(localStorage.getItem('auth'));
     if(authdata && authdata.isSuccess==true){
       this.authCheck=true;
+      let user_details = JSON.parse(localStorage.getItem('user_details'));
+      this.username= user_details?user_details.name:"USERNAME";
     }
   }
 
