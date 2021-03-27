@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\JobDetailsResource;
+use App\Models\JobDetails;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,13 +60,19 @@ class JobDetailsController extends Controller
                     'url' => $request->urlCtrl?$request->urlCtrl:null,
                 ];
 
+                $jobdetails = new JobDetails();
+                $jobdetails->fill($data);
+                $jobdetails->save();
+
+
+
                 return response()->json([
                     "serverResponse" => [
                     "code" => 200,
                     "message" => 'Request All',
                     "isSuccess" => true
                     ],
-                    "result"=>$data
+                    "result"=>new JobDetailsResource($jobdetails)
                 ]);
             }
         } catch (TokenExpiredException $e) {
