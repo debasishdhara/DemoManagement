@@ -1,10 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment from 'moment';
+const moment = _moment;
 
+export const MY_FORMATS = {
+  parse: {
+      dateInput: 'LL'
+  },
+  display: {
+      dateInput: 'MM/DD/YYYY',
+      monthYearLabel: 'YYYY',
+      dateA11yLabel: 'LL',
+      monthYearA11yLabel: 'YYYY'
+  }
+};
 @Component({
   selector: 'app-jobdetails',
   templateUrl: './jobdetails.component.html',
-  styleUrls: ['./jobdetails.component.scss']
+  styleUrls: ['./jobdetails.component.scss'],
+  providers:[{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+  { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }]
 })
 export class JobdetailsComponent implements OnInit {
   isChecked:boolean;
@@ -98,6 +115,29 @@ export class JobdetailsComponent implements OnInit {
 
   saveDetails(){
 
+    let data = {
+      jobtitleCtrl:this.firstFormGroup.controls['jobtitleCtrl'].value,
+      organizationnameCtrl:this.firstFormGroup.controls['organizationnameCtrl'].value,
+      joblocationCtrl:this.firstFormGroup.controls['joblocationCtrl'].value,
+      urlCtrl:this.firstFormGroup.controls['urlCtrl'].value,
+      positionCtrl:this.firstFormGroup.controls['positionCtrl'].value,
+      noOfOpeningCtrl:this.firstFormGroup.controls['noOfOpeningCtrl'].value,
+      interviewDateCtrl:moment(this.firstFormGroup.controls['interviewDateCtrl'].value).format('YYYY-MM-DD'),
+      salaryRangeCtrl:this.firstFormGroup.controls['salaryRangeCtrl'].value,
+      jobDescriptionCtrl:this.firstFormGroup.controls['jobDescriptionCtrl'].value,
+      servicetirmCtrl:this.firstFormGroup.controls['servicetirmCtrl'].value,
+      minageCtrl:this.secondFormGroup.controls['minageCtrl'].value,
+      maxageCtrl:this.secondFormGroup.controls['maxageCtrl'].value,
+      educationCtrl:this.secondFormGroup.controls['educationCtrl'].value,
+      percentageCtrl:this.secondFormGroup.controls['percentageCtrl'].value,
+      minexpCtrl:this.secondFormGroup.controls['minexpCtrl'].value,
+      physicalcheckCtrl:this.secondFormGroup.controls['physicalcheckCtrl'].value,
+      categoryCtrl:this.secondFormGroup.controls['categoryCtrl'].value,
+      genderCtrl:this.secondFormGroup.controls['genderCtrl'].value,
+      all_course:this.isChecked
+    };
+
+    console.log(data);
   }
 
   ageConfirmation(c: AbstractControl): { invalid: boolean } {
