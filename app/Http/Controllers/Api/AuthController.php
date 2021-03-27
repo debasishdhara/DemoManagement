@@ -109,7 +109,11 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(["serverResponse" => [
+            "code" => 200,
+            "message" => 'User Successfully LogOut',
+            "isSuccess" => true
+        ]]);
     }
 
     /**
@@ -128,9 +132,9 @@ class AuthController extends Controller
                 ]], 404);
             }else{
                 return response()->json(["serverResponse" => [
-                    "code" => 401,
-                    "message" => 'user_not_found',
-                    "isSuccess" => false
+                    "code" => 200,
+                    "message" => 'Token Found',
+                    "isSuccess" => true
                 ],"result"=>$this->respondWithToken(auth()->refresh(true,true))]);
             }
         } catch (TokenExpiredException $e) {

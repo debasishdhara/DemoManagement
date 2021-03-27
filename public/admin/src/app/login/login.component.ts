@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RoutecheckService } from '../routecheck.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
   username:any;
   password:any;
   data:any;
+  @Input() authCheck:boolean = false;
   constructor(private logServ:RoutecheckService) { }
 
   ngOnInit(): void {
@@ -24,8 +25,13 @@ export class LoginComponent implements OnInit {
       console.log(res);
       this.data = res;
       if(this.data.serverResponse.isSuccess){
+        this.authCheck=true;
+        let authdata = {
+          isSuccess:true
+        };
         localStorage.setItem('user_details',JSON.stringify(this.data.result.user_details));
         localStorage.setItem('con',JSON.stringify(this.data.result.token_details.original));
+        localStorage.setItem('auth',JSON.stringify(authdata));
       }
     });
   }

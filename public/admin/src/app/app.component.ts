@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { LoginComponent } from './login/login.component';
 import { RoutecheckService } from './routecheck.service';
 
 @Component({
@@ -8,12 +9,19 @@ import { RoutecheckService } from './routecheck.service';
 })
 export class AppComponent {
   title = 'projectdemo';
-  authCheck:boolean = false;
+  authCheck:boolean=false;
+  @ViewChild(LoginComponent) logcheck;
   constructor(private authcheckService:RoutecheckService) {
-    authcheckService.checkAuth().subscribe(res=>{
-      console.log(res);
-    }, err => {
-      console.log(err);
-    });
+    setInterval(() => {
+      this.authChekFromStore();
+    },1000);
   }
+
+  authChekFromStore(){
+    let authdata = JSON.parse(localStorage.getItem('auth'));
+    if(authdata && authdata.isSuccess==true){
+      this.authCheck=true;
+    }
+  }
+
 }
