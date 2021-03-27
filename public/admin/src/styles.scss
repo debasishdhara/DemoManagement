@@ -114,3 +114,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-label-wrapper{
   overflow: visible !important;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #363535;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(224, 218, 218);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(233, 223, 223);
+}
