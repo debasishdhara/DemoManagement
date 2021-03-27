@@ -15,6 +15,7 @@ class JobDetails extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'course_check',
         'category',
         'education',
