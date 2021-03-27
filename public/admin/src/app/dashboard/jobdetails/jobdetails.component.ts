@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
+import { RoutecheckService } from 'src/app/routecheck.service';
 const moment = _moment;
 
 export const MY_FORMATS = {
@@ -51,7 +52,7 @@ export class JobdetailsComponent implements OnInit {
     categoryCtrl:"2",
     genderCtrl:"2",
   };
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private jobservice:RoutecheckService) {
 
   }
 
@@ -138,6 +139,10 @@ export class JobdetailsComponent implements OnInit {
     };
 
     console.log(data);
+
+    this.jobservice.jobcreate(data).subscribe((res)=>{
+      console.log(res);
+    });
   }
 
   ageConfirmation(c: AbstractControl): { invalid: boolean } {

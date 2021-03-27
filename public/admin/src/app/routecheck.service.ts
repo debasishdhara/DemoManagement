@@ -66,4 +66,13 @@ export class RoutecheckService implements CanActivate {
   login(data){
     return this.http.post(this.baseURL+"v1/login",data);
   }
+
+  jobcreate(data){
+    let condata = JSON.parse(localStorage.getItem('con'));
+    let head = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization':'Bearer '+(condata?condata.access_token:"")
+    });
+    return this.http.post(this.baseURL+"auth/jobcreate",data,{headers:head});
+  }
 }

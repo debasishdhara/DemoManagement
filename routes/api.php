@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\JobDetailsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureTokenIsValid;
@@ -40,7 +41,7 @@ Route::group([
 ], function ($router) {
     Route::post('refresh',[AuthController::class,'refresh'])->name('refresh');// 'Api\AuthController@refresh'
     Route::post('me',[AuthController::class,'me'] )->name('me');//'Api\AuthController@me'
-
+    Route::post('jobcreate',[JobDetailsController::class,'jobDetails'] )->name('jobcreate');
 });
 
 
