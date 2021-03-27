@@ -80,7 +80,7 @@ export class JobdetailsComponent implements OnInit {
       genderCtrl:new FormControl(''),
     },{validator: this.ageConfirmation});
 
-    this.setallvalue();
+    // this.setallvalue(); // for demo data show
 
   }
   public hasfirstError = (controlName: string, errorName: string) =>{
