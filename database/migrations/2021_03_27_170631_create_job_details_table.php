@@ -15,6 +15,10 @@ class CreateJobDetailsTable extends Migration
     {
         Schema::create('job_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->tinyInteger('course_check')->comment('1=>false,2=>true')->default(1)->nullable();
             $table->tinyInteger('category')->comment('1=>All,2=>General,3=>SC,4=>ST,5=>OBC')->nullable();
             $table->tinyInteger('education')->comment('1=>10th Pass,2=>12th Pass,3=>Diploma,4=>Post Graduation,5=>Graduation,6=>Masters')->nullable();
