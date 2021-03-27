@@ -127,7 +127,11 @@ class AuthController extends Controller
                     "isSuccess" => false
                 ]], 404);
             }else{
-                return $this->respondWithToken(auth()->refresh(true,true));
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'user_not_found',
+                    "isSuccess" => false
+                ],"result"=>$this->respondWithToken(auth()->refresh(true,true))]);
             }
         } catch (TokenExpiredException $e) {
                 return response()->json(["serverResponse" => [

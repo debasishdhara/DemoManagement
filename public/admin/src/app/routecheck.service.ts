@@ -10,6 +10,7 @@ import { catchError, retry, map } from 'rxjs/operators';
 })
 export class RoutecheckService implements CanActivate {
   protected baseURL = environment.base_url;
+  authdata:any;
   constructor(private http: HttpClient) { }
 
 
@@ -24,8 +25,12 @@ export class RoutecheckService implements CanActivate {
       'Content-Type':'application/json',
       'Authorization':'Bearer '+(data?data.access_token:"")
     });
-    return this.http.post(this.baseURL+"auth/me",{},{headers:head}).pipe(map(res=>{
+    return this.http.post(this.baseURL+"auth/refresh",{},{headers:head}).pipe(map(res=>{
       console.log(res);
+      this.authdata = res;
+      if(this.authdata.serverResponse.isSuccess){
+        localStorage.setItem('con',JSON.stringify(this.authdata.result.original));
+      }
     }));
   }
 
