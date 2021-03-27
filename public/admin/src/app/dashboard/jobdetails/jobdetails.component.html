@@ -6,14 +6,17 @@
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Job Title</mat-label>
           <input matInput placeholder="Job Title" formControlName="jobtitleCtrl" required>
+          <mat-error align="end" *ngIf="hasfirstError('jobtitleCtrl', 'required')">Job title required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Organization Name</mat-label>
           <input matInput placeholder="Organization Name" formControlName="organizationnameCtrl" required>
+          <mat-error align="end" *ngIf="hasfirstError('organizationnameCtrl', 'required')">Organization Name required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Job Location</mat-label>
           <input matInput placeholder="Job Location" formControlName="joblocationCtrl" required>
+          <mat-error align="end" *ngIf="hasfirstError('joblocationCtrl', 'required')">Job Location required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>URL</mat-label>
@@ -22,10 +25,12 @@
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Position</mat-label>
           <input matInput type="number" placeholder="Position" formControlName="positionCtrl" required>
+          <mat-error align="end" *ngIf="hasfirstError('positionCtrl', 'required')">Position required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>No of Opening</mat-label>
           <input matInput type="number" placeholder="No of Opening" formControlName="noOfOpeningCtrl" required>
+          <mat-error align="end" *ngIf="hasfirstError('noOfOpeningCtrl', 'required')">No of Opening required</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Interview Date</mat-label>
@@ -34,6 +39,7 @@
             <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
           </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error align="end" *ngIf="hasfirstError('interviewDateCtrl', 'required')">Interview Date required</mat-error>
           <!-- <mat-datepicker #datepicker>
             <mat-datepicker-actions>
               <button mat-button matDatepickerCancel>Cancel</button>
@@ -51,12 +57,14 @@
             <mat-option value="5">90000-100000</mat-option>
             <mat-option value="6">100000-120000</mat-option>
           </mat-select>
+          <mat-error align="end" *ngIf="hasfirstError('salaryRangeCtrl', 'required')">Salary Range required</mat-error>
         </mat-form-field>
         <div  class="example-mat-form-field">
           <mat-form-field appearance="outline" class="example-full-textarea-width">
             <mat-label>Job Description</mat-label>
             <textarea  matInput #message maxlength="150" placeholder="Ex. Job Description Details" formControlName="jobDescriptionCtrl" required></textarea>
-            <!-- <mat-hint align="end">{{message.value.length}} / 256</mat-hint> -->
+            <mat-error align="end" *ngIf="hasfirstError('jobDescriptionCtrl', 'required')">Job Description required</mat-error>
+            <!-- <mat-hint align="end" *ngIf="email.invalid">{{message.value.length}} / 256</mat-hint> -->
           </mat-form-field>
         </div>
         <span class="example-label">Characters Remaining : {{message.value.length}} / 150</span>
@@ -80,10 +88,14 @@
       <mat-form-field appearance="outline" class="example-4-width">
         <mat-label>Min Age Limit</mat-label>
         <input matInput type="number" placeholder="Min age Limit" formControlName="minageCtrl" required>
+        <mat-error align="end" *ngIf="hassecoundError('minageCtrl', 'required')">Min Age Limit required</mat-error>
+        <mat-error align="end" *ngIf="maxagecheck">Min Age 18-60 required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-4-width">
         <mat-label>Max Age Limit</mat-label>
         <input matInput type="number" placeholder="Max age Limit" formControlName="maxageCtrl" required>
+        <mat-error align="end" *ngIf="hassecoundError('maxageCtrl', 'required')">Max Age Limit required</mat-error>
+        <mat-error align="end" *ngIf="maxagecheck">Max Age 18-60 required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-4-width">
         <mat-label>Minimum Qalification</mat-label>
@@ -95,21 +107,40 @@
           <mat-option value="5">Graduation</mat-option>
           <mat-option value="6">Masters</mat-option>
         </mat-select>
+        <mat-error align="end" *ngIf="hassecoundError('educationCtrl', 'required')">Minimum Qalification required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-4-width">
         <mat-label>Qalification Percentage (%)</mat-label>
-        <input matInput type="number" placeholder="Max age Limit" formControlName="percentageCtrl">
+        <input matInput type="number" placeholder="100" formControlName="percentageCtrl">
       </mat-form-field>
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Minimum Exprience (in months)</mat-label>
         <input matInput type="number" placeholder="12" formControlName="minexpCtrl">
       </mat-form-field>
-      <div class="example-full-width">
+      <div class="example-full-width-first">
         <mat-label>Physical Disability </mat-label>
         <mat-radio-group aria-label="Select an option"  formControlName="physicalcheckCtrl">
           <mat-radio-button value="1">Any </mat-radio-button>
           <mat-radio-button value="2">PWD </mat-radio-button>
           <mat-radio-button value="3">Non PWD </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="example-full-radio-width">
+        <mat-label>Category </mat-label>
+        <mat-radio-group aria-label="Select an option"  formControlName="categoryCtrl">
+          <mat-radio-button value="1">All </mat-radio-button>
+          <mat-radio-button value="2">General </mat-radio-button>
+          <mat-radio-button value="3">SC </mat-radio-button>
+          <mat-radio-button value="4">ST </mat-radio-button>
+          <mat-radio-button value="5">OBC </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="example-full-radio-width-last">
+        <mat-label>Gender </mat-label>
+        <mat-radio-group aria-label="Select an option"  formControlName="genderCtrl">
+          <mat-radio-button value="1">Any </mat-radio-button>
+          <mat-radio-button value="2">Male </mat-radio-button>
+          <mat-radio-button value="3">Female </mat-radio-button>
         </mat-radio-group>
       </div>
       <div class="example-last-button">
@@ -120,9 +151,11 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Courses</ng-template>
-    <p>You are now done.</p>
+    <p>All Courses</p>
+    <mat-slide-toggle [(ngModel)]="isChecked">All Courses</mat-slide-toggle>
     <div class="example-last-button">
       <button  mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button (click)="saveDetails()">Save</button>
       <button  mat-raised-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
