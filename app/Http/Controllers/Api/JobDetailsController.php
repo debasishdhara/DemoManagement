@@ -41,7 +41,7 @@ class JobDetailsController extends Controller
                     'category' => $request->categoryCtrl?(int)$request->categoryCtrl:null,
                     'education' => $request->educationCtrl?(int)$request->educationCtrl:null,
                     'gender' => $request->genderCtrl?(int)$request->genderCtrl:null,
-                    'interview_date' => $request->interview_date?Carbon::createFromFormat('Y-m-d',$request->interview_date)->format("Y-m-d"):null,
+                    'interview_date' => $request->interviewDateCtrl?Carbon::createFromFormat('Y-m-d',$request->interviewDateCtrl)->format("Y-m-d"):null,
                     'job_description' => $request->jobDescriptionCtrl?$request->jobDescriptionCtrl:null,
                     'job_location' => $request->joblocationCtrl?$request->joblocationCtrl:null,
                     'job_title' => $request->jobtitleCtrl?$request->jobtitleCtrl:null,
