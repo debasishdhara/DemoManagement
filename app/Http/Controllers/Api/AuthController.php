@@ -63,22 +63,38 @@ class AuthController extends Controller
     {
         try {
             if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'user_not_found',
+                    "isSuccess" => false
+                ]], 404);
             }else{
                 return response()->json(auth()->user());
             }
         } catch (TokenExpiredException $e) {
-                return response()->json(['token_expired'], $e->getStatusCode());
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_expired',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
         } catch (TokenInvalidException $e) {
-                return response()->json(['token_invalid'], $e->getStatusCode());
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_invalid',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
         } catch (JWTException $e) {
-                return response()->json(['token_absent'], $e->getStatusCode());
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_absent',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
         }
         return response()->json([
             "serverResponse" => [
                 "code" => 401,
                 "message" => "User Details Not Found",
-                "isSuccess" => true
+                "isSuccess" => false
             ]
             ]);
         // return response()->json(auth()->user());
@@ -103,7 +119,43 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh(true,true));
+        try {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'user_not_found',
+                    "isSuccess" => false
+                ]], 404);
+            }else{
+                return $this->respondWithToken(auth()->refresh(true,true));
+            }
+        } catch (TokenExpiredException $e) {
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_expired',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
+        } catch (TokenInvalidException $e) {
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_invalid',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
+        } catch (JWTException $e) {
+                return response()->json(["serverResponse" => [
+                    "code" => 401,
+                    "message" => 'token_absent',
+                    "isSuccess" => false
+                ]], $e->getStatusCode());
+        }
+        return response()->json([
+            "serverResponse" => [
+                "code" => 401,
+                "message" => "User Details Not Found",
+                "isSuccess" => false
+            ]
+            ]);
+
     }
 
     /**
