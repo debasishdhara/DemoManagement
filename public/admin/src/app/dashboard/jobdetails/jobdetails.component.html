@@ -72,11 +72,11 @@
         <div  class="example-mat-form-field">
           <mat-form-field appearance="outline" class="example-full-textarea-width">
             <mat-label>Service Terms</mat-label>
-            <textarea  matInput #service maxlength="150" placeholder="Ex. I need help with..." formControlName="servicetirmCtrl"></textarea>
+            <textarea  matInput #service maxlength="120" placeholder="Ex. I need help with..." formControlName="servicetirmCtrl"></textarea>
             <!-- <mat-hint align="end">{{message.value.length}} / 256</mat-hint> -->
           </mat-form-field>
         </div>
-        <span class="example-label">Characters Remaining : {{service.value.length}} / 150</span>
+        <span class="example-label">Characters Remaining : {{service.value.length}} / 120</span>
       <div class="example-last-button">
         <button  mat-raised-button matStepperNext>Next</button>
       </div>
