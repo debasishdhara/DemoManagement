@@ -1,7 +1,6 @@
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AppOverlayConfig } from './overlay.module';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class OverlayService {
   constructor(
     private overlay: Overlay
   ) { }
-  createOverlay(config: AppOverlayConfig): OverlayRef {
+  createOverlay(config: OverlayConfig): OverlayRef {
       return this.overlay.create(config);
   }
   attachTemplatePortal(overlayRef: OverlayRef, templateRef: TemplateRef<any>, vcRef: ViewContainerRef) {
