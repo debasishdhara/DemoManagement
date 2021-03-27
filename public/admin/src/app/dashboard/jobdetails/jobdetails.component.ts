@@ -25,6 +25,14 @@ export const MY_FORMATS = {
   { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }]
 })
 export class JobdetailsComponent implements OnInit {
+
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+  displayProgressSpinner = false;
+  spinnerWithoutBackdrop = false;
+
+
   isChecked:boolean;
   isLinear = true;
 
@@ -80,7 +88,7 @@ export class JobdetailsComponent implements OnInit {
       genderCtrl:new FormControl(''),
     },{validator: this.ageConfirmation});
 
-    // this.setallvalue(); // for demo data show
+    this.setallvalue(); // for demo data show
 
   }
   public hasfirstError = (controlName: string, errorName: string) =>{
@@ -114,6 +122,12 @@ export class JobdetailsComponent implements OnInit {
     this.isChecked=true;
   }
 
+  showSpinnerWithoutBackdrop = () => {
+    this.spinnerWithoutBackdrop = true;
+    setTimeout(() => {
+      this.spinnerWithoutBackdrop = false;
+    }, 3000);
+  };
   saveDetails(){
 
     let data = {

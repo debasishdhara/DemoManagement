@@ -5,6 +5,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { JobdetailsComponent } from './jobdetails/jobdetails.component';
 import { MatrialModule } from '../matrial/matrial.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from '../progress-spinner/progress-spinner.module';
+import { ProgressSpinnerComponent } from '../progress-spinner/progress-spinner.component';
 
 
 @NgModule({
@@ -14,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     MatrialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ProgressSpinnerModule
   ]
 })
 export class DashboardModule { }

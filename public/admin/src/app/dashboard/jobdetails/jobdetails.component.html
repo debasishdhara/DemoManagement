@@ -145,7 +145,7 @@
       </div>
       <div class="example-last-button">
         <button  mat-raised-button matStepperPrevious>Back</button>
-        <button  mat-raised-button matStepperNext>Next</button>
+        <button  mat-raised-button matStepperNext (click)="showSpinnerWithoutBackdrop()">Next</button>
       </div>
     </form>
   </mat-step>
@@ -174,3 +174,6 @@
     </div>
   </mat-step>
 </mat-vertical-stepper>
+<app-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true" [positionGloballyCenter]="true"
+ [displayProgressSpinner]="displayProgressSpinner">
+</app-progress-spinner>
