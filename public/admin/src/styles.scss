@@ -29,3 +29,88 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #209096;
   font-weight: 500;
 }
+
+
+.mat-button-wrapper{
+  color: #209096;
+}
+.headingbutton>.mat-button-wrapper{
+  color: #252424;
+}
+.customFormField {
+  position: relative;
+  text-align: left;
+  transition: all 0.2s;
+  border: 1px solid #bfbabac9;
+  margin: 15px 0 15px !important;
+  label {
+      color: #fff;
+      text-align: left;
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      opacity: 0.4;
+      transition: all 0.2s;
+      z-index: 1;
+  }
+  input {
+      margin: 0 !important;
+      padding: 10px 10px;
+      height: auto;
+      position: relative;
+      z-index: 2;
+      background: transparent;
+  }
+  &.focused {
+      label {
+          color: #B278FF;
+          top: -12px;
+          opacity: 1;
+          transition: all 0.2s;
+      }
+  }
+  .errorMsg {
+      color: #f00;
+      font-size: 12px;
+      margin: 0;
+      display: block;
+      background: #261d4c;
+      line-height: 16px;
+      padding: 5px;
+  }
+  .infoMsg {
+      color: #B278FF;
+      font-size: 12px;
+      margin: 0;
+      display: block;
+      background: #261d4c;
+      line-height: 16px;
+      padding: 5px;
+  }
+}
+.form-control:focus{
+  background: transparent;
+  box-shadow: none;
+  color: #c3c3c3;
+}
+
+.mat-radio-button {
+  margin-right: 3%;
+  margin-left: 1%;
+  margin-top: 3%;
+}
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label{
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 8%;
+  padding: 4px;
+  opacity: 1;
+  background: #ffffff;
+  transition: all 0.2s;
+  z-index: 1;
+  text-align: center !important;
+}
+.mat-form-field-label-wrapper{
+  overflow: visible !important;
+}

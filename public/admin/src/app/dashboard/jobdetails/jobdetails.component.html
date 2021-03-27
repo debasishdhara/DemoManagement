@@ -3,35 +3,127 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Job Details</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Job Title</mat-label>
+          <input matInput placeholder="Job Title" formControlName="jobtitleCtrl" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Organization Name</mat-label>
+          <input matInput placeholder="Organization Name" formControlName="organizationnameCtrl" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Job Location</mat-label>
+          <input matInput placeholder="Job Location" formControlName="joblocationCtrl" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>URL</mat-label>
+          <input matInput placeholder="http://example.com" formControlName="urlCtrl">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Position</mat-label>
+          <input matInput type="number" placeholder="Position" formControlName="positionCtrl" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>No of Opening</mat-label>
+          <input matInput type="number" placeholder="No of Opening" formControlName="noOfOpeningCtrl" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Interview Date</mat-label>
+          <input matInput placeholder="M/D/YYYY"  [matDatepicker]="picker" formControlName="interviewDateCtrl" required>
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <!-- <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Salary Range</mat-label>
+          <mat-select placeholder="Select Rage" formControlName="salaryRangeCtrl" required>
+            <mat-option value="1">Below 50000</mat-option>
+            <mat-option value="2">50000-60000</mat-option>
+            <mat-option value="3">60000-70000</mat-option>
+            <mat-option value="4">70000-80000</mat-option>
+            <mat-option value="5">90000-100000</mat-option>
+            <mat-option value="6">100000-120000</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div  class="example-mat-form-field">
+          <mat-form-field appearance="outline" class="example-full-textarea-width">
+            <mat-label>Job Description</mat-label>
+            <textarea  matInput #message maxlength="150" placeholder="Ex. Job Description Details" formControlName="jobDescriptionCtrl" required></textarea>
+            <!-- <mat-hint align="end">{{message.value.length}} / 256</mat-hint> -->
+          </mat-form-field>
+        </div>
+        <span class="example-label">Characters Remaining : {{message.value.length}} / 150</span>
+
+        <div  class="example-mat-form-field">
+          <mat-form-field appearance="outline" class="example-full-textarea-width">
+            <mat-label>Service Terms</mat-label>
+            <textarea  matInput #service maxlength="150" placeholder="Ex. I need help with..." formControlName="servicetirmCtrl"></textarea>
+            <!-- <mat-hint align="end">{{message.value.length}} / 256</mat-hint> -->
+          </mat-form-field>
+        </div>
+        <span class="example-label">Characters Remaining : {{service.value.length}} / 150</span>
+      <div class="example-last-button">
+        <button  mat-raised-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Minimum Qualities</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
+      <mat-form-field appearance="outline" class="example-4-width">
+        <mat-label>Min Age Limit</mat-label>
+        <input matInput type="number" placeholder="Min age Limit" formControlName="minageCtrl" required>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <mat-form-field appearance="outline" class="example-4-width">
+        <mat-label>Max Age Limit</mat-label>
+        <input matInput type="number" placeholder="Max age Limit" formControlName="maxageCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-4-width">
+        <mat-label>Minimum Qalification</mat-label>
+        <mat-select placeholder="Select Qalification" formControlName="educationCtrl" required>
+          <mat-option value="1">10th Pass</mat-option>
+          <mat-option value="2">12th Pass</mat-option>
+          <mat-option value="3">Diploma</mat-option>
+          <mat-option value="4">Post Graduation</mat-option>
+          <mat-option value="5">Graduation</mat-option>
+          <mat-option value="6">Masters</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-4-width">
+        <mat-label>Qalification Percentage (%)</mat-label>
+        <input matInput type="number" placeholder="Max age Limit" formControlName="percentageCtrl">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Minimum Exprience (in months)</mat-label>
+        <input matInput type="number" placeholder="12" formControlName="minexpCtrl">
+      </mat-form-field>
+      <div class="example-full-width">
+        <mat-label>Physical Disability </mat-label>
+        <mat-radio-group aria-label="Select an option"  formControlName="physicalcheckCtrl">
+          <mat-radio-button value="1">Any </mat-radio-button>
+          <mat-radio-button value="2">PWD </mat-radio-button>
+          <mat-radio-button value="3">Non PWD </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="example-last-button">
+        <button  mat-raised-button matStepperPrevious>Back</button>
+        <button  mat-raised-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Courses</ng-template>
     <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div class="example-last-button">
+      <button  mat-raised-button matStepperPrevious>Back</button>
+      <button  mat-raised-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
