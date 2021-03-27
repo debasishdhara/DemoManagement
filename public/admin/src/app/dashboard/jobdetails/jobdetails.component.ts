@@ -122,10 +122,10 @@ export class JobdetailsComponent implements OnInit {
     this.isChecked=true;
   }
 
-  showSpinnerWithoutBackdrop = () => {
-    this.spinnerWithoutBackdrop = true;
+  showProgressSpinner = () => {
+    this.displayProgressSpinner = true;
     setTimeout(() => {
-      this.spinnerWithoutBackdrop = false;
+      this.displayProgressSpinner = false;
     }, 3000);
   };
   saveDetails(){
