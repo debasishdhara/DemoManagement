@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RoutecheckService } from '../routecheck.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   password:any;
   data:any;
   @Input() authCheck:boolean = false;
-  constructor(private logServ:RoutecheckService) { }
+  constructor(private logServ:RoutecheckService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user_details',JSON.stringify(this.data.result.user_details));
         localStorage.setItem('con',JSON.stringify(this.data.result.token_details.original));
         localStorage.setItem('auth',JSON.stringify(authdata));
+        this.router.navigateByUrl('/profile');
       }
     });
   }

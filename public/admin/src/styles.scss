@@ -10,3 +10,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #aad3da;
 	// animation: gradient 15s ease infinite;
 }
+
+.mat-step-icon-content{
+  background: #209096;
+}
+
+.mat-step-icon.mat-step-icon-state-number.mat-step-icon-selected{
+  background: #209096;
+}
+.mat-step-icon.mat-step-icon-state-number{
+  background: #209096;
+}
+
+.mat-step-label.mat-step-label-active.mat-step-label-selected>.mat-step-text-label.ng-star-inserted{
+  font-size: 19px;
+  color: #209096;
+  font-weight: 500;
+}

@@ -289,27 +289,46 @@
   }
 </style>
 <!-- Toolbar -->
-<mat-toolbar color="primary" class="app-header">
-  <mat-toolbar-row>
-    <span *ngIf="!authCheck">DemoTest</span>
-    <ng-container *ngIf="authCheck">
-      <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Hi, Debasish</span>
-    </ng-container>
-    <span class="example-spacer"></span>
-    <ng-container *ngIf="authCheck">
-      <div class="example-button-container">
-        <button mat-fab color="warn" class="newicon" aria-label="Example icon button with a home icon">
-          <mat-icon color="primary">perm_identity</mat-icon>
-        </button>
-      </div>
-    </ng-container>
-    <span class="example-icon" *ngIf="!authCheck">
-      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
-      <!-- <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a> -->
-    </span>
-  </mat-toolbar-row>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container" [hasBackdrop]="true">
+  <mat-sidenav #sidenav mode="over" [(opened)]="opened" (opened)="events.push('open!')"
+               (closed)="events.push('close!')">
+      <mat-list dense>
+      <mat-list-item> Demo Demo Demo List </mat-list-item>
+      <mat-list-item> Demo Demo Demo List </mat-list-item>
+      <mat-list-item> Demo Demo Demo List </mat-list-item>
+      </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="app-header">
+      <mat-toolbar-row>
+        <span *ngIf="!authCheck">DemoTest</span>
+        <ng-container *ngIf="authCheck">
+          <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>Hi, Debasish</span>
+        </ng-container>
+        <span class="example-spacer"></span>
+        <ng-container *ngIf="authCheck">
+          <div class="example-button-container">
+            <button mat-fab color="warn" class="newicon" aria-label="Example icon button with a home icon" (click)="isOpen = !isOpen" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+              <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon" class="iconnew"></mat-icon>
+            </button>
+          </div>
+          <!-- This template displays the overlay content and is connected to the button -->
+          <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen" >
+            <ul class="example-list">
+              <li><button mat-button color="primary" (click)="logout()">Sign Out</button></li>
+            </ul>
+          </ng-template>
+        </ng-container>
+        <span class="example-icon" *ngIf="!authCheck">
+          <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+          <!-- <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a> -->
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
