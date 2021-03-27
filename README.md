@@ -1,35 +1,26 @@
+Application Setup for demo:
 
 ## Laravel
-
-Application Setup for demo:
 
 - git clone https://github.com/debasishdhara/DemoManagement.git
 
 - cd DemoManagement
 
-- - composer install
-
-- - mv .env.example .env
-
-- - php artisan jwt:secret
-
-- - php artisan migrate
-
-- - php artisan db:seed
+-  composer install
+-  mv .env.example .env
+-  php artisan jwt:secret
+-  php artisan migrate
+-  php artisan db:seed
 
 
 
 ## Angular
 
 - cd public
-
 - cd admin
-
-- - npm i
-
-- - set up base url from src/environments/ two files one for development build and another one for production build
-
-- - ng build --prod --base-href=/superadmin/
+-  npm i
+-  set up base url from src/environments/ two files one for development build and another one for production build
+- ng build --prod --base-href=/superadmin/
 
 
 
