@@ -88,7 +88,7 @@ export class JobdetailsComponent implements OnInit {
       genderCtrl:new FormControl(''),
     },{validator: this.ageConfirmation});
 
-    // this.setallvalue(); // for demo data show
+    this.setallvalue(); // for demo data show
 
   }
   public hasfirstError = (controlName: string, errorName: string) =>{
@@ -123,10 +123,12 @@ export class JobdetailsComponent implements OnInit {
   }
 
   showProgressSpinner = () => {
+    if(this.secondFormGroup.valid){
     this.displayProgressSpinner = true;
-    setTimeout(() => {
-      this.displayProgressSpinner = false;
-    }, 3000);
+      setTimeout(() => {
+        this.displayProgressSpinner = false;
+      }, 3000);
+    }
   };
   saveDetails(){
 
